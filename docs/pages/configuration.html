@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. System Configuration &mdash; cyberCommons Framework  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Install Remote Workers" href="remote_worker.html" />
+    <link rel="prev" title="1. Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> cyberCommons Framework
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation/Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. System Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-files">2.1. Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-ssl-keys-and-where-they-are-stored">2.2. Generating SSL Keys and Where They are Stored</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generating-ssl-certificates">2.2.1. Generating SSL certificates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#renewing-ssl-certificates">2.2.2. Renewing SSL Certificates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ssl-certificate-locations">2.2.3. SSL Certificate Locations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configure-email-backend">2.3. Configure Email Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#turn-on-debug-mode-for-restful-api">2.3.1. Turn On Debug Mode for RESTful API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remote_worker.html">3. Install Remote Workers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rest_api.html">RESTful API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Users and Persmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help and Issue Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cyberCommons Framework</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">2. </span>System Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/configuration.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="tex2jax_ignore mathjax_ignore section" id="system-configuration">
+<h1><span class="section-number">2. </span>System Configuration<a class="headerlink" href="#system-configuration" title="Permalink to this headline"></a></h1>
+<div class="section" id="configuration-files">
+<h2><span class="section-number">2.1. </span>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this headline"></a></h2>
+<p>The majority of configuration settings are stored in the following files:</p>
+<ul class="simple">
+<li><p>dc_config/cybercom_config.env</p>
+<ul>
+<li><p>Used for general application settings and container versions</p></li>
+<li><p>Configure Nginx to use Let’s Encrypt</p></li>
+<li><p>Configure MongoDB database name and Docker volume prefix</p></li>
+<li><p>Set the ALLOWED_HOSTS setting - this must be updated if running on a publicly accessible server!</p></li>
+</ul>
+</li>
+<li><p>dc_config/secrets.env (This should be copied from dc_config/secrets_template.env as a starting point)</p>
+<ul>
+<li><p>!!! Once created, you should change the default credentials as they are not secure !!!</p></li>
+<li><p>Used to store sensitive variables that should not be tracked in version control</p></li>
+<li><p>Set MongoDB and RabbitMQ credentials</p></li>
+<li><p>Configure email server connection</p></li>
+<li><p>SSL configration</p></li>
+<li><p>Configure Let’s Encrypt reminder notification email address (NOTIFY_EMAIL)</p></li>
+</ul>
+</li>
+<li><p>requirements.txt</p>
+<ul>
+<li><p>Python requirements for the API / Django</p></li>
+</ul>
+</li>
+<li><p>dc_config/images/celery/requirements.txt</p>
+<ul>
+<li><p>Python requirements for the dockerized Celery container</p></li>
+</ul>
+</li>
+</ul>
+<p>It is recommended to copy dc_config/secrets_template.env to dc_config/secrets.env as a starting point. Once created, you should change the default credentials as they are not secure!</p>
+</div>
+<div class="section" id="generating-ssl-keys-and-where-they-are-stored">
+<h2><span class="section-number">2.2. </span>Generating SSL Keys and Where They are Stored<a class="headerlink" href="#generating-ssl-keys-and-where-they-are-stored" title="Permalink to this headline"></a></h2>
+<p>Rabbitmq and MongoDB are configured to use SSL certificates to secure their communications. By default, during the setup of cyberCommons, these certificates are configured to be valid for 365 days. This default can be changed by editing the CA_EXPIRE value in the dc_config/secrets.env file. Once the certificates expire, they will need to be regenerated by running <code class="docutils literal notranslate"><span class="pre">shell</span> <span class="pre">make</span> <span class="pre">initssl</span></code></p>
+<div class="section" id="generating-ssl-certificates">
+<h3><span class="section-number">2.2.1. </span>Generating SSL certificates<a class="headerlink" href="#generating-ssl-certificates" title="Permalink to this headline"></a></h3>
+<p>Self-signed certificates are automatically generated on first run for RabbitMQ and MongoDB. Generation of self-signed certificates for NGINX is currently not implemented.
+LetsEncrypt - refer to the <a class="reference external" href="installation.html#build-let-s-encrypt-docker-container">LetsEncrypt</a> section of the installation instructions.</p>
+</div>
+<div class="section" id="renewing-ssl-certificates">
+<h3><span class="section-number">2.2.2. </span>Renewing SSL Certificates<a class="headerlink" href="#renewing-ssl-certificates" title="Permalink to this headline"></a></h3>
+<ol class="simple">
+<li><p>Self-signed certificates can be updated by running the following command from the cyberCommons root directory:</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ make initssl
+</pre></div>
+</div>
+<p><em>All remote Celery workers will need the new SSL client certificates to resume communications. See the section below on where these certificates are stored</em></p>
+<ol class="simple">
+<li><p>LetsEncrypt certificates can be renewed by running the following from the cyberCommons root directory:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make renew_certbot
+</pre></div>
+</div>
+<p><em>Follow LetsEncrypt’s prompts</em></p>
+</div>
+<div class="section" id="ssl-certificate-locations">
+<h3><span class="section-number">2.2.3. </span>SSL Certificate Locations<a class="headerlink" href="#ssl-certificate-locations" title="Permalink to this headline"></a></h3>
+<ol class="simple">
+<li><p>Self-signed locations:</p>
+<ul class="simple">
+<li><p>MongoDB</p>
+<ul>
+<li><p>dc_config/ssl/backend/client/mongodb.pem</p></li>
+<li><p>dc_config/ssl/backend/server/mongodb.pem</p></li>
+<li><p>dc_config/ssl/testca/cacert.pem</p></li>
+</ul>
+</li>
+<li><p>RabbitMQ</p>
+<ul>
+<li><p>dc_config/ssl/backend/client/key.pem</p></li>
+<li><p>dc_config/ssl/backend/client/cert.pem</p></li>
+<li><p>dc_config/ssl/backend/server/key.pem</p></li>
+<li><p>dc_config/ssl/backend/server/cert.pem</p></li>
+<li><p>dc_config/ssl/testca/cacert.pem</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>LetsEncrypt location:</p>
+<ul class="simple">
+<li><p>NGINX</p>
+<ul>
+<li><p>dc_config/ssl/nginx/letcencrypt/etc/live/*</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="configure-email-backend">
+<h2><span class="section-number">2.3. </span>Configure Email Backend<a class="headerlink" href="#configure-email-backend" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Populate the Email Configuration section in dc_config/secrets.env. <em>The following is an example using gmail.</em></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EMAIL_BACKEND</span><span class="o">=</span><span class="n">django</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">smtp</span><span class="o">.</span><span class="n">EmailBackend</span>
+<span class="n">EMAIL_HOST</span><span class="o">=</span><span class="n">smtp</span><span class="o">.</span><span class="n">gmail</span><span class="o">.</span><span class="n">com</span>
+<span class="n">EMAIL_PORT</span><span class="o">=</span><span class="mi">587</span>
+<span class="n">EMAIL_HOST_USER</span><span class="o">=</span><span class="n">username</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span>
+<span class="n">EMAIL_HOST_PASSWORD</span><span class="o">=</span><span class="n">password</span>
+<span class="n">EMAIL_USE_TLS</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+<div class="section" id="turn-on-debug-mode-for-restful-api">
+<h3><span class="section-number">2.3.1. </span>Turn On Debug Mode for RESTful API<a class="headerlink" href="#turn-on-debug-mode-for-restful-api" title="Permalink to this headline"></a></h3>
+<p>The Debug mode is turned off by default. If you need debug messages</p>
+<ol class="simple">
+<li><p>Set DEBUG=True in dc_config/cybercom_config.py</p></li>
+<li><p>Add host(s) to ALLOWED_HOSTS list if needed. See Django’s documentation on the <a class="reference external" href="https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts">ALLOWED_HOSTS</a> setting for more detail.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="1. Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="remote_worker.html" class="btn btn-neutral float-right" title="3. Install Remote Workers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, cyberCommons.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

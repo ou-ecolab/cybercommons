@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTful API &mdash; cyberCommons Framework  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Users and Persmissions" href="permissions.html" />
+    <link rel="prev" title="3. Install Remote Workers" href="remote_worker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> cyberCommons Framework
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation/Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">2. System Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remote_worker.html">3. Install Remote Workers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RESTful API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#catalog-and-data-store">Catalog and Data Store</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-return-data-structure">API Return Data Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#url-parameters">URL Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#page-size">page_size:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#page">page:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#format">format:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query">query:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query-language">Query Language</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-database-and-collections">Create Database and Collections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filter-query">Filter Query</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distinct-query">Distinct Query</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mongodb-aggregation">MongoDb Aggregation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-execution-celery">Task Execution (celery)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#list-of-available-tasks-and-task-history">List of Available Tasks and Task History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#task-submission">Task Submission</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#task-html-post-data-requirement">Task HTML POST Data Requirement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#curl-command-command-line-scripting">Curl Command - Command-line Scripting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-script-to-execute-script">Python Script to Execute Script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#javascript-jquery-postjson">Javascript JQuery $.postJSON</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Users and Persmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help and Issue Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Contributors</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cyberCommons Framework</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>RESTful API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/rest_api.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="tex2jax_ignore mathjax_ignore section" id="restful-api">
+<h1>RESTful API<a class="headerlink" href="#restful-api" title="Permalink to this headline"></a></h1>
+<div class="section" id="catalog-and-data-store">
+<h2>Catalog and Data Store<a class="headerlink" href="#catalog-and-data-store" title="Permalink to this headline"></a></h2>
+<p>The Catalog and Data Store are using the same logic and syntax for access and query language. The database which holds the information is MongoDB. MongoDB is a schemaless document noSQL database. The query language that the API deploys is the json representation of MongoDB.</p>
+<div class="section" id="api-return-data-structure">
+<h3>API Return Data Structure<a class="headerlink" href="#api-return-data-structure" title="Permalink to this headline"></a></h3>
+<p>The API returns data in a consistent structure.</p>
+<ul>
+<li><p>count: number if result records returned</p></li>
+<li><p>meta: page, page_size, pages</p></li>
+<li><p>next and previous: urls to page through data</p></li>
+<li><p>results: list of records return from API</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  {
+      &quot;count&quot;: 1, 
+      &quot;meta&quot;: {
+          &quot;page&quot;: 1, 
+          &quot;page_size&quot;: 50, 
+          &quot;pages&quot;: 1
+      }, 
+      &quot;next&quot;: null, 
+      &quot;previous&quot;: null, 
+      &quot;results&quot;: [
+      
+      ]
+  }
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="url-parameters">
+<h3>URL Parameters<a class="headerlink" href="#url-parameters" title="Permalink to this headline"></a></h3>
+<div class="section" id="page-size">
+<h4>page_size:<a class="headerlink" href="#page-size" title="Permalink to this headline"></a></h4>
+<p>The page_size returns the available records up to page_size. If more records exist, the next url value will be deployed.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ?page_size=100
+    ?page_size=0
+</pre></div>
+</div>
+<p>If page_size=0 API will return all records.</p>
+</div>
+<div class="section" id="page">
+<h4>page:<a class="headerlink" href="#page" title="Permalink to this headline"></a></h4>
+<p>The page variable will move to the page requested. If the page does not exist the last page will be shown.</p>
+</div>
+<div class="section" id="format">
+<h4>format:<a class="headerlink" href="#format" title="Permalink to this headline"></a></h4>
+<ol>
+<li><p>api (Default) - Return type is HTML format</p></li>
+<li><p>json - Return type is JSON format</p></li>
+<li><p>jsonp - Return type is JSONP format</p></li>
+<li><p>xml - Return type is xml format</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ?format=json
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="query">
+<h4>query:<a class="headerlink" href="#query" title="Permalink to this headline"></a></h4>
+<p>The query url parameter is a JSON format query language. Please see below</p>
+</div>
+<div class="section" id="query-language">
+<h4>Query Language<a class="headerlink" href="#query-language" title="Permalink to this headline"></a></h4>
+<p>The API query language is based from the <a class="reference external" href="https://docs.mongodb.com/manual/tutorial/query-documents/#python">MongoDB pyhton query</a> syntax.</p>
+</div>
+<div class="section" id="create-database-and-collections">
+<h4>Create Database and Collections<a class="headerlink" href="#create-database-and-collections" title="Permalink to this headline"></a></h4>
+<div class="section" id="create-database">
+<h5>Create Database<a class="headerlink" href="#create-database" title="Permalink to this headline"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    View: /api/data_store/data/  HTTP Request: Post
+    Data: {&quot;database&quot;:&quot;mydata&quot;}  Format: JSON
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-database">
+<h5>Delete Database<a class="headerlink" href="#delete-database" title="Permalink to this headline"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    View: /api/data_store/data/  HTTP Request: Post
+    Data: {&quot;action&quot;:&quot;delete&quot;,&quot;database&quot;:&quot;mydata&quot;}  Format: JSON        
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-collection">
+<h5>Create Collection<a class="headerlink" href="#create-collection" title="Permalink to this headline"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    View: /api/data_store/data/mydata  HTTP Request: Post
+    Data: {&quot;collection&quot;:&quot;mycollection&quot;}  Format: JSON
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-collection">
+<h5>Delete Collection<a class="headerlink" href="#delete-collection" title="Permalink to this headline"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    View: /api/data_store/data/mydata  HTTP Request: Post
+    Data: {&quot;action&quot;:&quot;delete&quot;,&quot;collection&quot;:&quot;mycollection&quot;}  Format: JSON
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="filter-query">
+<h4>Filter Query<a class="headerlink" href="#filter-query" title="Permalink to this headline"></a></h4>
+<p>The following examples are on the collection view.</p>
+<div class="section" id="id1">
+<h5>Filter Query<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ?query={&quot;filter&quot;:{&quot;tag&quot;:&quot;content&quot;}}
+
+    ?query={&quot;filter&quot;:{&quot;tag&quot;:&quot;content&quot;,&quot;tag2&quot;:&quot;content&quot;}}
+    
+    # Return fields (projection: 0,1)
+
+    ?query={&quot;filter&quot;:{&quot;tag&quot;:&quot;content&quot;,&quot;tag2&quot;:&quot;content&quot;},&quot;projection&quot;:{&quot;tag&quot;:0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="distinct-query">
+<h4>Distinct Query<a class="headerlink" href="#distinct-query" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ?distinct=tag,tag2
+    # Include query parameter
+    ?distinct=tag&amp;query={&quot;filter&quot;:{&quot;department&quot;:&quot;Informatics&quot;}}
+</pre></div>
+</div>
+</div>
+<div class="section" id="mongodb-aggregation">
+<h4>MongoDb Aggregation<a class="headerlink" href="#mongodb-aggregation" title="Permalink to this headline"></a></h4>
+<p>Please refer to <a class="reference external" href="https://docs.mongodb.com/manual/core/aggregation-pipeline/">MongoDB Documentation</a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ?aggregate=[{&quot;$match&quot;:{&quot;status&quot;: &quot;urgent&quot;}},
+      {&quot;$group&quot;:{&quot;_id&quot;:&quot;$productName&quot;,&quot;sumQuantity&quot;:{&quot;$sum&quot;:&quot;$quantity&quot;}}}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="task-execution-celery">
+<h3>Task Execution (celery)<a class="headerlink" href="#task-execution-celery" title="Permalink to this headline"></a></h3>
+<p>The Celery Distributed Task Queue is integrated throught the RESTful API.</p>
+<div class="section" id="list-of-available-tasks-and-task-history">
+<h4>List of Available Tasks and Task History<a class="headerlink" href="#list-of-available-tasks-and-task-history" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    URL: /api/queue/
+    Task History: /api/queue/usertasks/
+</pre></div>
+</div>
+</div>
+<div class="section" id="task-submission">
+<h4>Task Submission<a class="headerlink" href="#task-submission" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    Example:
+    URL /api/queue/run/cybercomq.tasks.tasks.add/
+    Docstring: Very import to give users the description of task. 
+    Curl Example: Comand-line example with API token
+</pre></div>
+</div>
+</div>
+<div class="section" id="task-html-post-data-requirement">
+<h4>Task HTML POST Data Requirement<a class="headerlink" href="#task-html-post-data-requirement" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    {
+        &quot;function&quot;: &quot;cybercomq.tasks.tasks.add&quot;,
+        &quot;queue&quot;: &quot;celery&quot;,
+        &quot;args&quot;: [],
+        &quot;kwargs&quot;: {},
+        &quot;tags&quot;: []
+    }
+</pre></div>
+</div>
+<p>function: task name
+queue: which queue to route the task
+args: [] List of argument
+kwargs: {} Keyword arguments
+tags: [] list of tags that will identify task run</p>
+</div>
+<div class="section" id="curl-command-command-line-scripting">
+<h4>Curl Command - Command-line Scripting<a class="headerlink" href="#curl-command-command-line-scripting" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    curl -X POST --data-ascii &#39;{&quot;function&quot;:&quot;cybercomq.tasks.tasks.add&quot;,&quot;queue&quot;:&quot;celery&quot;,&quot;args&quot;:[],&quot;kwargs&quot;:{  },&quot;tags&quot;: []}&#39; http://localhost/api/queue/run/cybercomq.tasks.tasks.add/.json -H Content-Type:application/json -H &#39;Authorization: Token &lt; authorized-token &gt; &#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-script-to-execute-script">
+<h4>Python Script to Execute Script<a class="headerlink" href="#python-script-to-execute-script" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    import requests,json
+
+    headers ={&#39;Content-Type&#39;:&#39;application/json&#39;,&quot;Authorization&quot;:&quot;Token &lt; authorized token &gt;&quot;}
+    data = {&quot;function&quot;:&quot;cybercomq.tasks.tasks.add&quot;,&quot;queue&quot;:&quot;celery&quot;,&quot;args&quot;:[2,2],&quot;kwargs&quot;:{},&quot;tags&quot;:[&quot;add&quot;]}
+    req=requests.post(&quot;http://localhost/api/queue/run/cybercomq.tasks.tasks.add/.json&quot;,data=json.dumps(data),headers=headers) 
+    print(req.text)
+</pre></div>
+</div>
+</div>
+<div class="section" id="javascript-jquery-postjson">
+<h4>Javascript JQuery $.postJSON<a class="headerlink" href="#javascript-jquery-postjson" title="Permalink to this headline"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    //postJSON is custom call for post to cybercommons api
+    $.postJSON = function(url, data, callback,fail) {
+        return jQuery.ajax({
+            &#39;type&#39;: &#39;POST&#39;,
+            &#39;url&#39;: url,
+            &#39;contentType&#39;: &#39;application/json&#39;,
+            &#39;data&#39;: JSON.stringify(data),
+            &#39;dataType&#39;: &#39;json&#39;,
+            &#39;success&#39;: callback,
+            &#39;error&#39;:fail,
+            &#39;beforeSend&#39;:function(xhr, settings){
+                xhr.setRequestHeader(&quot;X-CSRFToken&quot;, getCookie(&#39;csrftoken&#39;));
+            }
+        });
+    }
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="remote_worker.html" class="btn btn-neutral float-left" title="3. Install Remote Workers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="permissions.html" class="btn btn-neutral float-right" title="Users and Persmissions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, cyberCommons.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
