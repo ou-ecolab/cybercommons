@@ -1,5 +1,17 @@
 version: "3.7"
 services:
+  local_fortran_example:
+    image: local_fortran_example
+    volumes:
+      - ./web/data:/data
+    build:
+        context: dc_config/images/local_fortran_example
+        args: 
+          - CELERY_SSH_USER
+    env_file:
+      - dc_config/cybercom_config.env
+      - dc_config/secrets.env
+
   cybercom_nginx:
     image: nginx:${NGINX_VERSION}
     restart: unless-stopped
@@ -67,6 +79,7 @@ services:
     depends_on:
       - cybercom_mongo
       - cybercom_rabbitmq
+      - local_fortran_example
   cybercom_api:
     deploy:
       resources:

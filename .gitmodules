@@ -1,0 +1,6 @@
+[submodule "web/ecopad_portal"]
+	path = web/ecopad_portal
+	url = https://github.com/ou-ecolab/ecopad_portal.git
+[submodule "dc_config/images/local_fortran_example"]
+	path = dc_config/images/local_fortran_example
+	url = https://github.com/ou-ecolab/local_fortran_example.git
