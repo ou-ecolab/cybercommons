@@ -5,6 +5,7 @@ dc_config/cybercom_config.env
 
 # django's web static files
 web/static/admin/*
+web/static/rest_framework/*
 
 startMongo
 # Byte-compiled / optimized / DLL files

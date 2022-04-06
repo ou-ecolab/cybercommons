@@ -1,3 +1,13 @@
+dc_config/secrets.env:
+# Creating secrets file for editing
+ifndef EDITOR
+ifeq ($(strip $(shell which nano)),)
+$(error dc_config/secrets.env will need to be manually created. Copy dc_config/secrets_template.env as a starting point)
+endif
+endif
+	@cp dc_config/secrets_template.env dc_config/secrets.env
+	@$${EDITOR:-nano} dc_config/secrets.env
+
 include dc_config/cybercom_config.env
 include dc_config/secrets.env
 
