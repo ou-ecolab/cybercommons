@@ -26,9 +26,11 @@ services:
     volumes:
       - ./dc_config/nginx/templates/${NGINX_TEMPLATE:-default}:/etc/nginx/templates/
       - ./web:/usr/share/nginx/html
-      - ./dc_config/ssl/nginx/letsencrypt/etc/live/${NGINX_HOST}/fullchain.pem:/etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem
+        #- ./dc_config/ssl/nginx/letsencrypt/etc/live/${NGINX_HOST}/fullchain.pem:/etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem
+      - ./dc_config/ssl/nginx/letsencrypt_cornell/etc/live/${NGINX_HOST}/fullchain.pem:/etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem
       - ./dc_config/ssl/backend/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-      - ./dc_config/ssl/nginx/letsencrypt/etc/live/${NGINX_HOST}/privkey.pem:/etc/letsencrypt/live/${NGINX_HOST}/privkey.pem
+        #- ./dc_config/ssl/nginx/letsencrypt/etc/live/${NGINX_HOST}/privkey.pem:/etc/letsencrypt/live/${NGINX_HOST}/privkey.pem
+      - ./dc_config/ssl/nginx/letsencrypt_cornell/etc/live/${NGINX_HOST}/privkey.pem:/etc/letsencrypt/live/${NGINX_HOST}/privkey.pem
     env_file:
       - dc_config/cybercom_config.env
   cybercom_mongo:
@@ -111,3 +113,8 @@ volumes:
   mongodata:
     name: "${MONGO_DOCKER_VOLUME_PREFIX}_mongo"
     external: true
+networks:
+  default:                               
+    driver: bridge                       
+    driver_opts:                         
+      com.docker.network.driver.mtu: 1450
