@@ -13,6 +13,7 @@ include dc_config/secrets.env
 
 COMPOSE_INIT = docker-compose -f dc_config/images/docker-compose-init.yml
 CERTBOT_INIT = docker-compose -f dc_config/images/certbot-initialization.yml
+CERTBOT_INIT_CORNELL = docker-compose -f dc_config/images/certbot-initialization_cornell.yml
 
 .PHONY: init intidb initssl superuser init_certbot renew_certbot shell apishell dbshell build force_build run stop test restart_api collectstatic
 
@@ -44,6 +45,18 @@ init_certbot:
 
 renew_certbot:
 	$(CERTBOT_INIT) run --rm cybercom_certbot
+	# FIXME: the following is not reloading certs
+	#@docker-compose exec cybercom_nginx nginx -s reload
+	# This is a work around until the reload signal is fixed
+	@docker-compose restart cybercom_nginx
+
+init_certbot_cornell:
+	$(CERTBOT_INIT_CORNELL) build
+	$(CERTBOT_INIT_CORNELL) up --abort-on-container-exit
+	$(CERTBOT_INIT_CORNELL) down
+
+renew_certbot_cornell:
+	$(CERTBOT_INIT_CORNELL) run --rm cybercom_certbot_cornell
 	# FIXME: the following is not reloading certs
 	#@docker-compose exec cybercom_nginx nginx -s reload
 	# This is a work around until the reload signal is fixed

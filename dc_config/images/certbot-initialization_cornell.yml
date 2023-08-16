@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  cybercom_nginx:
+    image: nginx:${NGINX_VERSION}
+    expose:
+      - 80
+      - 443
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ../nginx/templates/bootstrap/:/etc/nginx/templates/
+      - ../../web:/usr/share/nginx/html
+  cybercom_certbot_cornell: 
+    image: certbot_cornell
+    build: ../ssl/nginx/letsencrypt_cornell/dockerfiles
+    environment: 
+      - NOTIFY_EMAIL
+      - NGINX_HOST
+    volumes:
+      - ../ssl/nginx/letsencrypt_cornell/etc:/etc/letsencrypt
+      - ../../web:/data/letsencrypt
+
